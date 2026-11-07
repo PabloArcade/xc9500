@@ -141,9 +141,11 @@ int vendor_cells_global_src(const device_t *dev, const unsigned char *fuses, uns
     int dset = dflt >= 0 && (unsigned long)dflt < count && fuses[dflt] == 0;
     int aset = alt >= 0 && (unsigned long)alt < count && fuses[alt] == 0;
     if (inverted && is_oe) {
-        char want[8]; snprintf(want, sizeof want, "OE%dI", net - 1);
+        char want[8];
+        int wn = snprintf(want, sizeof want, "OE%dI", net - 1);
         long ia = -1;
-        for (int k = 0; k < D->nn; k++) if (strcmp(D->names[k].name, want) == 0) ia = (long)D->names[k].addr;
+        if (wn > 0 && wn < (int)sizeof want)
+            for (int k = 0; k < D->nn; k++) if (strcmp(D->names[k].name, want) == 0) ia = (long)D->names[k].addr;
         *inverted = ia >= 0 && (unsigned long)ia < count && fuses[ia] == 0;
     }
     if (aset && !dset) return (net % N) + 1;

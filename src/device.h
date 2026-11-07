@@ -19,7 +19,7 @@
 #define COLUMN_TAIL_WIDTH     36   /* tail slots */
 /* Single definition of the version, used by the banner and the .vhd
  * header. */
-#define XC9500TOOL_VERSION    "v6.136"
+#define XC9500TOOL_VERSION    "v6.137"
 
 #define MACROCELLS_PER_FB     18   /* always 18 MCs per FB */
 /* Largest part in the family is XC95288/XC95288XL, 16 FBs. */

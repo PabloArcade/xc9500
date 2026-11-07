@@ -1,4 +1,4 @@
-# xc9500dump v6.136 -- source
+# xc9500dump v6.137 -- source
 
 XC9500 / XC9500XL (.jed) fuse map decompiler by Darksoft.
 Reads the JEDEC file of a Xilinx XC9500 or XC9500XL CPLD and writes VHDL + UCF that ISE 14.7 compiles back into a part
@@ -7,7 +7,7 @@ that behaves the same. Built for arcade PCB preservation. Use at your own risk.
 ## Commands
 
 ```
-xc9500dump v6.136 -- XC9500 family .jed decompiler by Darksoft
+xc9500dump v6.137 -- XC9500 family .jed decompiler by Darksoft
 
 Commands:
   xc9500dump dump   <file.jed>                   structural report
@@ -60,7 +60,7 @@ beside what was asked for. Option names and values are not case-sensitive; `--de
 Other options: `--noportfix` keeps an unresolved FastCONNECT source as an undriven signal instead of an input port;
 `--nobanner` suppresses the banner.
 
-The banner `xc9500 decoder tool by Darksoft v6.136. Use at your own risk.` goes to standard error, first, on every run.
+The banner `xc9500 decoder tool by Darksoft v6.137. Use at your own risk.` goes to standard error, first, on every run.
 Exit codes: 0 done, 1 usage, 2 refused or error (the reason is printed).
 
 ## Supported parts and packages (10 devices, 34 packages)
@@ -103,5 +103,6 @@ cd src && make windows     Windows x86-64 with x86_64-w64-mingw32-gcc: xc9500dum
 ```
 
 The Windows binary is linked with a 32 MB stack (`-Wl,--stack,33554432`); the decoder keeps large work arrays on the
-stack and the default Windows stack is not enough. Every device table is compiled in (`src/device.c`,
+stack and the default Windows stack is not enough. The Windows binary is stripped and carries no link time stamp, so a
+rebuild gives the same bytes. Every device table is compiled in (`src/device.c`,
 `src/vendor_cells_table.h`): decoding needs no other program or data file.

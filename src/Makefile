@@ -3,7 +3,9 @@
 #   make windows    Windows x86-64 binary with mingw-w64: xc9500dump.exe
 # The Windows binary is linked with a 32 MB stack reserve: the decoder keeps
 # several megabytes of per-device work arrays on the stack, and the default
-# stack of a Windows thread is not enough.
+# stack of a Windows thread is not enough. The Windows binary is stripped (the
+# toolchain's runtime libraries carry debug sections otherwise) and carries no
+# link time stamp, so that a rebuild gives the same bytes.
 CC      = cc
 CFLAGS  = -Wall -Wextra -O2 -std=c99
 TARGET  = xc9500dump
@@ -32,7 +34,7 @@ WINSTACK  = 33554432
 WINTARGET = xc9500dump.exe
 
 windows:
-	$(WINCC) $(CFLAGS) -Wl,--stack,$(WINSTACK) -o $(WINTARGET) $(SRCS)
+	$(WINCC) $(CFLAGS) -Wl,--strip-all -Wl,--no-insert-timestamp -Wl,--stack,$(WINSTACK) -o $(WINTARGET) $(SRCS)
 
 clean:
 	rm -f $(OBJS) $(TARGET) $(WINTARGET)

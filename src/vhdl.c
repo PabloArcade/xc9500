@@ -106,6 +106,10 @@ static void pin_sig(int pin, char *buf, int sz) {
  * than by string-slicing bga_pin_name(), so the two cannot drift apart.
  * BGA encoding: 1000 + (row-'A'+1)*100 + col, so 1103 -> row 1 ('A') col 3. */
 static void pin_loc(int pin, char *buf, int sz) {
+    if (pin < 0 || pin >= MAX_PINS) {   /* not a pin of any supported package */
+        snprintf(buf, sz, "?");
+        return;
+    }
     if (pin_is_bga(pin)) {
         int c = pin - 1000, r = c / 100;   /* rows 27..32 = AA..AF */
         if (r <= 26) snprintf(buf, sz, "%c%d", (char)('A' + r - 1), c % 100);
@@ -996,7 +1000,8 @@ static int or_expand_expr(const vctx_t *v, const char *base, const char *pol,
         if (parts[i][0] == '!') {            /* FBINV member */
             char inner[LITEXPR_MAX];
             lit_to_expr(v, parts[i] + 1, inner, sizeof inner);
-            snprintf(one, sizeof one, "not %s", inner);
+            n = snprintf(one, sizeof one, "not %s", inner);
+            if (n < 0 || n >= (int)sizeof one) return 0;   /* never truncate */
         } else
             lit_to_expr(v, parts[i], one, sizeof one);
         n = snprintf(out + used, sz - used, "%s%s", i ? " and " : "", one);
@@ -2548,7 +2553,7 @@ static char *ca_slurp(FILE *f, size_t *len) {
 }
 static void alias_loc_fix_write(const char *v, const char *u, FILE *fv, FILE *fu) {
     enum { MAXP = 512 };
-    char moved[MAXP][24], pins[MAXP][12]; int nm = 0;
+    char moved[MAXP][64], pins[MAXP][12]; int nm = 0;
     const char *body = strstr(v, "\nbegin\n"); const char *ent_end = strstr(v, "\nend entity");
     if (body && ent_end) {
         int depth = 0;
@@ -2578,7 +2583,8 @@ static void alias_loc_fix_write(const char *v, const char *u, FILE *fv, FILE *fu
                     }
                 }
             }
-            if (!eol) break; ln = eol + 1;
+            if (!eol) break;
+            ln = eol + 1;
         }
     }
     if (nm == 0) { fputs(v, fv); if (fu && u) fputs(u, fu); return; }
@@ -2598,7 +2604,8 @@ static void alias_loc_fix_write(const char *v, const char *u, FILE *fv, FILE *fu
             }
             if (drop >= 0) fprintf(fu, "# NET \"%s\" LOC = \"%s\" is a VHDL port attribute (cause C)\n", moved[drop], pins[drop]);
             else fwrite(ln, 1, ll, fu);
-            if (!eol) break; ln = eol + 1;
+            if (!eol) break;
+            ln = eol + 1;
         }
     }
 }
