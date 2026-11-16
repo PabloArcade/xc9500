@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 #ifndef UCF_H
 #define UCF_H
 #include <stddef.h>

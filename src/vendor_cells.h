@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 #ifndef VENDOR_CELLS_H
 #define VENDOR_CELLS_H
 /* Vendor control cells: the fuses decode.c does not decode into logic,

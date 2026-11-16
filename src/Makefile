@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 # xc9500dump -- build with any c99 compiler and the C library only.
 #   make            Linux (or any POSIX) binary: xc9500dump
 #   make windows    Windows x86-64 binary with mingw-w64: xc9500dump.exe

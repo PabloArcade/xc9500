@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 /* vendor_cells.c -- vendor control cells.
  *
  * These are the fuses decode.c does not decode into logic: OR-array cells

@@ -106,3 +106,8 @@ The Windows binary is linked with a 32 MB stack (`-Wl,--stack,33554432`); the de
 stack and the default Windows stack is not enough. The Windows binary is stripped and carries no link time stamp, so a
 rebuild gives the same bytes. Every device table is compiled in (`src/device.c`,
 `src/vendor_cells_table.h`): decoding needs no other program or data file.
+
+## License
+Copyright (C) DARKSOFT
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. See the LICENSE file.

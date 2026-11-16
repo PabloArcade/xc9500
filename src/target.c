@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 /* target.c -- explicit device/package selection.
  *
  * Every LOC in a UCF names a physical pin, so the package must be right. A

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 /* target.h -- explicit device/package selection */
 #ifndef TARGET_H
 #define TARGET_H

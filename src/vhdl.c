@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 /*
  * vhdl.c -- XC9500/XC9500XL VHDL output stage
  *

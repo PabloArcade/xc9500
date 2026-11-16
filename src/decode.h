@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 #ifndef DECODE_H
 #include <stdio.h>
 #define DECODE_H

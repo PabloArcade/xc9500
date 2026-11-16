@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 #include "xc9500.h"
 #include "device.h"
 #include "jed.h"
